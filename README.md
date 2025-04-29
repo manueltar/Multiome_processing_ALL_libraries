@@ -28,25 +28,47 @@ $ bash ~/Scripts/Wraper_scripts/123_Amulet.sh /group/soranzo/manuel.tardaguila/2
 $ bash ~/Scripts/Wraper_scripts/125_Seurat_second_pass_v2.sh
 
 
-
-
 ### Block 5
 
 $ bash ~/Scripts/Wraper_scripts/126_merge_pre_merged_per_sample_v2.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/ processing_outputs
  /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/processing_outputs/merged.atac_fragments.tsv.gz
 
+### Block 6: Final QC
+
 ----> Jupyter notebook: Final_QC_in_the_merged_object.ipynb
+
+### Recluster and export h5ad for rpca
 
 $ bash ~/Scripts/Wraper_scripts/153_Recluster_and_export_h5ad.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/ processing_outputs
 
+### Block 7 Cell typist prediction
+
+----> Jupyter notebook: Cell_Typist_triple_prediction_cell_identity.ipynb
+----> Jupyter notebook: mapping_cell_types.ipynb
+
+### Block 8 Rpca #1
+
 $ bash ~/Scripts/Wraper_scripts/163_rpca_integration.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/ processing_outputs
 
+----> Jupyter notebook:RPCA_graphs_ALL_SAMPLES.ipynb
+----> Jupyter notebook:RPCA_explore_ALL_SAMPLES.ipynb
+
+### Block 9 notebook to assign barcodes
+
+----> Jupyter notebook: notebook_to_assign_barcodes.ipynb
+
+### Block 10 Rpca #2
 
 $ bash /home/manuel.tardaguila/Scripts/Wraper_scripts/172_rpca_post_genotypiong.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/ processing_outputs
 
+### Block 11 Final cell annotation
 
 NOTEBOOK: /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/processing_outputs/Post_G_final_cell_annotation.ipynb
 
-$ bash ~/Scripts/Wraper_scripts/138_MACS2_recall_peaks_by_cell_type_integrated_annotation.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/ processing_outputs
+### Block 12 DE
 
 $ bash ~/Scripts/Wraper_scripts/173_Multiome_DE_per_identity_both_Diffs.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/processing_outputs/Downstream_analysis/ DE_per_identity
+
+### Block 13 DA
+
+$ bash ~/Scripts/Wraper_scripts/138_MACS2_recall_peaks_by_cell_type_integrated_annotation.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/ processing_outputs
