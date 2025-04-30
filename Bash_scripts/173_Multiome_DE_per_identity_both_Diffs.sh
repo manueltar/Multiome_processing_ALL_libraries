@@ -33,45 +33,44 @@ do
 
     Diff_array_sel=${a[$i]}
     echo "$Diff_array_sel"
+    conda activate /home/manuel.tardaguila/conda_envs/multiome_NEW_downstream_analysis
 
-    # conda activate multiome_NEW_downstream_analysis
+    ### DE_function
 
-    # ### DE_function
+    type=$(echo "$Diff_array_sel""_""$analysis""_""DE_function")
+    outfile_DE_function=$(echo "$Log_files""outfile_1_""$type"".out")
+    touch $outfile_DE_function
+    echo -n "" > $outfile_DE_function
+    name_DE_function=$(echo "$type""_job")
+    seff_name=$(echo "seff""_""$type")
 
-    # type=$(echo "$Diff_array_sel""_""$analysis""_""DE_function")
-    # outfile_DE_function=$(echo "$Log_files""outfile_1_""$type"".out")
-    # touch $outfile_DE_function
-    # echo -n "" > $outfile_DE_function
-    # name_DE_function=$(echo "$type""_job")
-    # seff_name=$(echo "seff""_""$type")
+    Rscript_DE_function=$(echo "$Rscripts_path""466_Multiome_DE_per_cell_type_both_Diffs.R")
 
-    # Rscript_DE_function=$(echo "$Rscripts_path""466_Multiome_DE_per_cell_type_both_Diffs.R")
-
-    # SeuratObject=$(echo "/group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/processing_outputs/merged_final_cell_annotation_intermediate.rds")
+    SeuratObject=$(echo "/group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/processing_outputs/merged_final_cell_annotation_intermediate.rds")
     
 
-    # myjobid_DE_function=$(sbatch --job-name=$name_DE_function --output=$outfile_DE_function --partition=cpuq --time=24:00:00 --nodes=1 --ntasks-per-node=15 --mem-per-cpu=8192 --parsable --wrap="Rscript $Rscript_DE_function --SeuratObject $SeuratObject --Diff_sel $Diff_array_sel --type $type --out $output_dir")
-    # myjobid_seff_DE_function=$(sbatch --dependency=afterany:$myjobid_DE_function --open-mode=append --output=$outfile_MSigDB_ORA --job-name=$seff_name --partition=cpuq --time=24:00:00 --nodes=1 --ntasks-per-node=1 --mem-per-cpu=128M --parsable --wrap="seff $myjobid_DE_function >> $outfile_DE_function")
+    myjobid_DE_function=$(sbatch --job-name=$name_DE_function --output=$outfile_DE_function --partition=cpuq --time=24:00:00 --nodes=1 --ntasks-per-node=15 --mem-per-cpu=8192 --parsable --wrap="Rscript $Rscript_DE_function --SeuratObject $SeuratObject --Diff_sel $Diff_array_sel --type $type --out $output_dir")
+    myjobid_seff_DE_function=$(sbatch --dependency=afterany:$myjobid_DE_function --open-mode=append --output=$outfile_MSigDB_ORA --job-name=$seff_name --partition=cpuq --time=24:00:00 --nodes=1 --ntasks-per-node=1 --mem-per-cpu=128M --parsable --wrap="seff $myjobid_DE_function >> $outfile_DE_function")
 
 
 
-    # ### volcano_function
+    ### volcano_function
 
-    # type=$(echo "$Diff_array_sel""_""$analysis""_""volcano_function")
-    # outfile_volcano_function=$(echo "$Log_files""outfile_2_""$type"".out")
-    # touch $outfile_volcano_function
-    # echo -n "" > $outfile_volcano_function
-    # name_volcano_function=$(echo "$type""_job")
-    # seff_name=$(echo "seff""_""$type")
+    type=$(echo "$Diff_array_sel""_""$analysis""_""volcano_function")
+    outfile_volcano_function=$(echo "$Log_files""outfile_2_""$type"".out")
+    touch $outfile_volcano_function
+    echo -n "" > $outfile_volcano_function
+    name_volcano_function=$(echo "$type""_job")
+    seff_name=$(echo "seff""_""$type")
 
-    # Rscript_volcano_function=$(echo "$Rscripts_path""467_Multiome_DE_volcano_plots_both_Diffs.R")
+    Rscript_volcano_function=$(echo "$Rscripts_path""467_Multiome_DE_volcano_plots_both_Diffs.R")
 
-    # DE_results=$(echo "$output_dir""DE_results_""$Diff_array_sel"".rds")
+    DE_results=$(echo "$output_dir""DE_results_""$Diff_array_sel"".rds")
 
-    # # --dependency=afterany:$myjobid_DE_function
+    # --dependency=afterany:$myjobid_DE_function
 
-    # myjobid_volcano_function=$(sbatch --dependency=afterany:$myjobid_DE_function --job-name=$name_volcano_function --output=$outfile_volcano_function --partition=cpuq --time=24:00:00 --nodes=1 --ntasks-per-node=2 --mem-per-cpu=4096 --parsable --wrap="Rscript $Rscript_volcano_function --DE_results $DE_results --Diff_sel $Diff_array_sel --type $type --out $output_dir")
-    # myjobid_seff_volcano_function=$(sbatch --dependency=afterany:$myjobid_volcano_function --open-mode=append --output=$outfile_MSigDB_ORA --job-name=$seff_name --partition=cpuq --time=24:00:00 --nodes=1 --ntasks-per-node=1 --mem-per-cpu=128M --parsable --wrap="seff $myjobid_volcano_function >> $outfile_MSigDB_ORA")
+    myjobid_volcano_function=$(sbatch --dependency=afterany:$myjobid_DE_function --job-name=$name_volcano_function --output=$outfile_volcano_function --partition=cpuq --time=24:00:00 --nodes=1 --ntasks-per-node=2 --mem-per-cpu=4096 --parsable --wrap="Rscript $Rscript_volcano_function --DE_results $DE_results --Diff_sel $Diff_array_sel --type $type --out $output_dir")
+    myjobid_seff_volcano_function=$(sbatch --dependency=afterany:$myjobid_volcano_function --open-mode=append --output=$outfile_MSigDB_ORA --job-name=$seff_name --partition=cpuq --time=24:00:00 --nodes=1 --ntasks-per-node=1 --mem-per-cpu=128M --parsable --wrap="seff $myjobid_volcano_function >> $outfile_MSigDB_ORA")
 
     ### heatmap_function
 
@@ -90,7 +89,7 @@ do
 
     # --dependency=afterany:$myjobid_DE_function
 
-    myjobid_heatmap_function=$(sbatch --job-name=$name_heatmap_function --output=$outfile_heatmap_function --partition=cpuq --time=24:00:00 --nodes=1 --ntasks-per-node=2 --mem-per-cpu=4096 --parsable --wrap="Rscript $Rscript_heatmap_function --DE_results $DE_results --normalised_counts $normalised_counts --Diff_sel $Diff_array_sel --type $type --out $output_dir")
+    myjobid_heatmap_function=$(sbatch --dependency=afterany:$myjobid_DE_function --job-name=$name_heatmap_function --output=$outfile_heatmap_function --partition=cpuq --time=24:00:00 --nodes=1 --ntasks-per-node=2 --mem-per-cpu=4096 --parsable --wrap="Rscript $Rscript_heatmap_function --DE_results $DE_results --normalised_counts $normalised_counts --Diff_sel $Diff_array_sel --type $type --out $output_dir")
     myjobid_seff_heatmap_function=$(sbatch --dependency=afterany:$myjobid_heatmap_function --open-mode=append --output=$outfile_MSigDB_ORA --job-name=$seff_name --partition=cpuq --time=24:00:00 --nodes=1 --ntasks-per-node=1 --mem-per-cpu=128M --parsable --wrap="seff $myjobid_heatmap_function >> $outfile_heatmap_function")
 
 
@@ -98,7 +97,7 @@ do
     conda deactivate
 
 
-exit
+
     ############################################################## ################################################################
     ############################################################## ################################################################
     ############################################################## ################################################################

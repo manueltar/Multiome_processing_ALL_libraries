@@ -1265,7 +1265,7 @@ Lolliplot_and_gene_annotation = function(option_list)
   
   setwd(out)
   
-  write.table(gene_annotation_wide, file="genes_GSEA_annotated.tsv", sep="\t", quote=F, row.names = F)
+  write.table(gene_annotation_wide, file=paste("genes_GSEA_annotated_",Diff_sel,".tsv",sep=''), sep="\t", quote=F, row.names = F)
   
   ### Lolliplot -----------------------
   

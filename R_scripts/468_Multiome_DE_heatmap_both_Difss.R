@@ -1,15 +1,15 @@
-# .libPaths()
-# assign(".lib.loc", "/home/manuel.tardaguila/conda_envs/multiome_NEW_downstream_analysis/lib/R/library", envir = environment(.libPaths))
-# .libPaths()
+.libPaths()
+assign(".lib.loc", "/home/manuel.tardaguila/conda_envs/multiome_NEW_downstream_analysis/lib/R/library", envir = environment(.libPaths))
+.libPaths()
 # # sessionInfo()
 
 
-.libPaths()
-.libPaths(new = c("/home/manuel.tardaguila/conda_envs/multiome_NEW_downstream_analysis/lib/R/library"))
-.libPaths()
+# .libPaths()
+# .libPaths(new = c("/home/manuel.tardaguila/conda_envs/multiome_NEW_downstream_analysis/lib/R/library"))
+# .libPaths()
 # sessionInfo()
 
-
+library("optparse")
 suppressMessages(library(dplyr)) 
 suppressMessages(library(ggplot2)) 
 suppressMessages(library(Matrix)) 
@@ -303,8 +303,8 @@ heatmap_function = function(option_list)
         
         # harcoded!!!!
         
-        names<-c('hESC','HemogenicEndothelium','MEP','early erythroid','late erythroid','early MK','MK','Mast cells','Classical monocytes','Double-negative thymocytes','gamma-delta T cells','ILC3','Regulatory T cells',
-                 'Tem/Effector helper T cells','Type 17 helper T cells','Plasmablasts','CD16- NK cells','NK cells','Fibroblasts')
+        names<-c('hESC','HemogenicEndothelium','MEP','early_erythroid','late_erythroid','early_MK','MK','Mast_cells','Classical_monocytes','Double-negative_thymocytes','gamma-delta_T_cells','ILC3','Regulatory_T_cells',
+                 'Tem/Effector_helper_T_cells','Type_17_helper_T_cells','Plasmablasts','CD16-_NK_cells','NK_cells','Fibroblasts')
         
         
         vector_colors_identity<-setNames(values, names)
@@ -316,6 +316,7 @@ heatmap_function = function(option_list)
         }
         
         vector_colors_identity<-vector_colors_identity[which(names(vector_colors_identity)%in%levels(annotation_col$identity))]
+
                                   
         
         if(DEBUG == 1){
@@ -323,6 +324,18 @@ heatmap_function = function(option_list)
           cat(str(vector_colors_identity))
           cat("\n")
         }
+        
+        
+        ## ChatGPT check missing identitites
+        
+        missing_identities <- setdiff(levels(annotation_col$identity), names(vector_colors_identity))
+        
+        if (length(missing_identities) > 0) {
+          cat("Missing colors for the following identities:\n")
+          print(missing_identities)
+          stop("Please add these identities to the color vector.")
+        }
+        
        
        ann_colors <- list( clone_line = vector_colors_clone_line,
                            Genotype = vector_colors_Genotype,
