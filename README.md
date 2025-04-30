@@ -14,7 +14,7 @@ $ bash ~/Scripts/Wraper_scripts/124_merge_atac_peaks.sh /group/soranzo/manuel.ta
 
 $ bash ~/Scripts/Wraper_scripts/122_snATAC_pipeline.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/ processing_outputs ########### There is an error in this code, it adds the sample names as the last lines of the merge file and it crashes later when using macs2 to do the peak calling
 
-$ sbatch ~/Scripts/sbatch/8_merge_atac_peaks_v2.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/processing_outputs/
+$ sbatch ~/Scripts/sbatch/8_merge_atac_peaks_v2.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/
 
 $ sbatch ~/Scripts/sbatch/6_align_to_barcodes_v2.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/ /group/soranzo/manuel.tardaguila/Multiome/RITM0023280/special_reference_files/GFP_transgene_vCHEK2_and_DNMT3A.fa MCO_01330
 
