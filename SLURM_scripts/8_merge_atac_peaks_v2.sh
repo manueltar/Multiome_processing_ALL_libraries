@@ -29,7 +29,7 @@ output_dir=$1
 
 cd "$output_dir"
 
-for SAMPLE in MCO_01326 MCO_01327 MCO_01328 MCO_01329 MCO_01330;do
+for SAMPLE in MCO_01326 MCO_01327 MCO_01328 MCO_01329 MCO_01330 MCO_01331 MCO_01332 MCO_01333;do
 
 
     echo "Processing: $SAMPLE $(date)" >&2
