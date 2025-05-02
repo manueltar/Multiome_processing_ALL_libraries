@@ -54,6 +54,11 @@ $ bash ~/Scripts/Wraper_scripts/163_rpca_integration.sh /group/soranzo/manuel.ta
 
 ### Block 9 notebook to assign barcodes
 
+#### Index the barcode genome with cellranger
+
+$ cellranger mkref --fasta /group/soranzo/manuel.tardaguila/Multiome/RITM0023280/special_reference_files/GFP_transgene_vCHEK2_and_DNMT3A.fa --genes /group/soranzo/manuel.tardaguila/Multiome/RITM0023280/special_reference_files/STAR.gtf --genome GFP_transgene_vCHEK2_and_DNMT3A_cellranger
+
+
 #### Modify targeted amplification of GEX to make it pass as CellRanger input
 
 $ bash ~/Scripts/Wraper_scripts/127_cellranger_alignment_of_targeted_amp_GEX.sh /group/soranzo/manuel.tardaguila/2025_hESC_MK_multiome/GEX_reseq/ alignment /group/soranzo/manuel.tardaguila/Multiome/MCO_20250123/250124_A02059_0109_AHWTHYDSXC/adapter_trimmed_fastq/
@@ -62,14 +67,14 @@ $ bash ~/Scripts/Wraper_scripts/146_cellranger_alignment_of_targeted_amp_GEX_lym
 
 $ bash ~/Scripts/Wraper_scripts/171_cellranger_alignment_of_targeted_amp_GEX_lymph.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/ targeted_amplicon_GEX /group/soranzo/manuel.tardaguila/Multiome/RITM0029357/250414_A01481_0283_BHMKVYDRX5/fastq_raw/
 
-#### 3. Run cellranger on the adapted reads
+#### Run cellranger on the adapted reads
 
 $ sbatch ~/Scripts/Wraper_scripts/128_cellranger_MCO_1326.sh /group/soranzo/manuel.tardaguila/2025_hESC_MK_multiome/GEX_reseq/alignment/cellranger/
 $ sbatch ~/Scripts/Wraper_scripts/128_cellranger_MCO_1327.sh /group/soranzo/manuel.tardaguila/2025_hESC_MK_multiome/GEX_reseq/alignment/cellranger/
 $ sbatch ~/Scripts/Wraper_scripts/128_cellranger_MCO_1328.sh /group/soranzo/manuel.tardaguila/2025_hESC_MK_multiome/GEX_reseq/alignment/cellranger/
 $ sbatch ~/Scripts/Wraper_scripts/128_cellranger_MCO_1329.sh /group/soranzo/manuel.tardaguila/2025_hESC_MK_multiome/GEX_reseq/alignment/cellranger/
 
-#### 4. Run CellBender to correct background of empty beads
+#### Run CellBender to correct background of empty beads
 
 $ sbatch ~/Scripts/Wraper_scripts/131_Cell_Bender_for_targeted_amplified_libraries.sh /group/soranzo/manuel.tardaguila/2025_hESC_MK_multiome/GEX_reseq/alignment/cellranger/ MCO_01326
 $ sbatch ~/Scripts/Wraper_scripts/131_Cell_Bender_for_targeted_amplified_libraries.sh /group/soranzo/manuel.tardaguila/2025_hESC_MK_multiome/GEX_reseq/alignment/cellranger/ MCO_01327
