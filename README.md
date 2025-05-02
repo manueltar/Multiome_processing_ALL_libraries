@@ -66,10 +66,19 @@ $ bash /home/manuel.tardaguila/Scripts/Wraper_scripts/172_rpca_post_genotypiong.
 
 NOTEBOOK: /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/processing_outputs/Post_G_final_cell_annotation.ipynb
 
-### Block 12 DE
+### Block 12 Call ATAC peaks by
+
+$ bash ~/Scripts/Wraper_scripts/138_MACS2_recall_peaks_by_cell_type_integrated_annotation.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/ processing_outputs
+
+### Block 13 DE
 
 $ bash ~/Scripts/Wraper_scripts/173_Multiome_DE_per_identity_both_Diffs.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/processing_outputs/Downstream_analysis/ DE_per_identity
 
-### Block 13 DA
+
+<Bespoke Heatmaps>
+
+$ bash ~/Scripts/Wraper_scripts/174_Multiome_bespoke_heatmaps_ALL_Diffs.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/processing_outputs/Downstream_analysis/ DE_per_identity /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/processing_outputs/Downstream_analysis/DE_per_identity/genes_ORA_annotated_Diff_lymph.tsv
+
+### Block 14 DA
 
 $ bash ~/Scripts/Wraper_scripts/138_MACS2_recall_peaks_by_cell_type_integrated_annotation.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/ processing_outputs
