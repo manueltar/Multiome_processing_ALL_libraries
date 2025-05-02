@@ -10,7 +10,7 @@
 #SBATCH --mail-user=manuel.tardaguila@fht.org
 #SBATCH --partition=cpuq
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
+#SBATCH --ntasks-per-node=16
 #SBATCH --output=merge_frag_%j.log
 #SBATCH --mem=96G
 
