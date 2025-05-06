@@ -107,3 +107,17 @@ $ bash ~/Scripts/Wraper_scripts/174_Multiome_bespoke_heatmaps_ALL_Diffs.sh /grou
 ### Block 14 DA
 
 $ bash ~/Scripts/Wraper_scripts/138_MACS2_recall_peaks_by_cell_type_integrated_annotation.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/ processing_outputs
+
+### Block 15 export h5ad for ATAC and RNA ----
+
+$ bash ~/Scripts/Wraper_scripts/176_Export_RNA_and_ATAC_for_SIMBA_multiome_CUX1.sh /group/soranzo/manuel.tardaguila/SC_RNA_seq/k562_multiome/ NEW_object_output
+
+### Ancillary functions  ----------------------------
+
+$ bash ~/Scripts/Wraper_scripts/142_custom_genesets.sh /group/soranzo/manuel.tardaguila/gene_sets/ Michelas_genesets
+
+
+
+
+
+

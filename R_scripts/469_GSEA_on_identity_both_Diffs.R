@@ -533,7 +533,7 @@ GSEA_function = function(option_list)
               
               
               minGSSize_spec<-1
-              maxGSSize_spec<-600
+              maxGSSize_spec<-1000
               
               
               if(DEBUG ==1){
@@ -1057,7 +1057,7 @@ Leading_edge_printer = function(option_list)
             
             FLAG_nchar<-nchar(filename)
             
-            if(FLAG_nchar >= 30){
+            if(FLAG_nchar >= 40){
               
               
               svgname<-paste(paste(unlist(strsplit(filename, split=''))[c(1:40)],collapse=''),'.svg', sep='')
@@ -1065,6 +1065,7 @@ Leading_edge_printer = function(option_list)
               
               
             }else{
+              
               
               svgname<-paste(filename,'.svg', sep='')
               
