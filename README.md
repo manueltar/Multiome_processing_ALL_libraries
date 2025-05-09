@@ -108,9 +108,17 @@ $ bash ~/Scripts/Wraper_scripts/174_Multiome_bespoke_heatmaps_ALL_Diffs.sh /grou
 
 $ bash ~/Scripts/Wraper_scripts/138_MACS2_recall_peaks_by_cell_type_integrated_annotation.sh /group/soranzo/manuel.tardaguila/2025_hESC_lymph_multiome/Multiome/ processing_outputs
 
-### Block 15 export h5ad for ATAC and RNA ----
+### Block 15 SIMBA----
 
 $ bash ~/Scripts/Wraper_scripts/176_Export_RNA_and_ATAC_for_SIMBA_multiome_CUX1.sh /group/soranzo/manuel.tardaguila/SC_RNA_seq/k562_multiome/ NEW_object_output
+
+$ bash ~/Scripts/Wraper_scripts/168_Simba_scan_for_kmers_motifs_v3.sh /group/soranzo/manuel.tardaguila/SC_RNA_seq/k562_multiome/ NEW_object_output /group/soranzo/manuel.tardaguila/SC_RNA_seq/k562_multiome/NEW_object_output/Peaks.bed
+
+[to edit python using vscode $ sbatch ~/Scripts/sbatch/10_vscode.sbatch and follow the indications inside the sbatch script]
+
+$ bash ~/Scripts/Wraper_scripts/170_Python_SIMBA_preprocessing_v2.sh /group/soranzo/manuel.tardaguila/SC_RNA_seq/k562_multiome/NEW_object_output/result_SIMBA/ QC_and_embeddings
+
+
 
 ### Ancillary functions  ----------------------------
 
