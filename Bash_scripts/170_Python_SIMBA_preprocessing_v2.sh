@@ -36,6 +36,7 @@ processors=$(echo "30")
 
 
 
+
 ### I had to edit the file /group/soranzo/manuel.tardaguila/2025_hESC_MK_multiome/Downstream_analysis_cluster_after_genotyping/result_SIMBA/pbg/graph0/model/config.json to include the full path 
 
 cd $MASTER_ROUTE
@@ -48,8 +49,7 @@ graph_dir=$(echo "/group/soranzo/manuel.tardaguila/SC_RNA_seq/k562_multiome/NEW_
 path_emb=$(echo "/group/soranzo/manuel.tardaguila/SC_RNA_seq/k562_multiome/NEW_object_output/result_SIMBA/pbg/graph0/model/")
 
 
-preexisting_graph=$(echo "/group/soranzo/manuel.tardaguila/SC_RNA_seq/k562_multiome/NEW_object_output/result_SIMBA/pbg/graph0/")
-preexisting_model=$(echo "/group/soranzo/manuel.tardaguila/SC_RNA_seq/k562_multiome/NEW_object_output/result_SIMBA/pbg/graph0/model/")
+
 path_entity_alias=$(echo "/group/soranzo/manuel.tardaguila/SC_RNA_seq/k562_multiome/NEW_object_output/result_SIMBA/pbg/graph0/")
 path_entity=$(echo "/group/soranzo/manuel.tardaguila/SC_RNA_seq/k562_multiome/NEW_object_output/result_SIMBA/pbg/graph0/input/entity/")
 

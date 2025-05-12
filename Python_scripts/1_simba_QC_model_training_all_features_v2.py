@@ -135,12 +135,12 @@ def graph_generation_and_train_model (args, adata_CG, adata_CP, adata_PK, adata_
 	return
 
 def extract_embeddings(args):
+	path_to_graph = args.graph_dir
 	emb_path = args.path_emb
 	logging.info("Set path to the directory for pbg")
 	si.load_pbg_config(path=emb_path)
 	workdir = args.output
 	logging.info("Load pre-existing graph and model")
-	path_to_graph = args.graph_dir
 	si.load_graph_stats(path=path_to_graph)# load in graph ('graph0') info	
 	si.load_pbg_config(path=emb_path)# load in model info for ('graph0')
 	logging.info("Load dictionary")	
@@ -197,7 +197,6 @@ def peak_compare_entities(args, adata_C, adata_P):
 
 def global_embedding(args, adata_C, adata_G, adata_M, adata_K, adata_P):
 	workdir = args.output
-	logging.info("Put together all embeddings") ## Add annotation of celltypes (optional)
 	adata_all = si.tl.embed(adata_ref=adata_C, list_adata_query=[adata_G, adata_M, adata_K, adata_P])
 	adata_all.write(os.path.join(workdir,'adata_all.h5ad'))
 	return adata_all
@@ -232,13 +231,7 @@ def main(args):
 			sys.exit(1)
 		graph_generation_and_train_model(args, adata_CG, adata_CP, adata_PK, adata_PM)
 
-	if not args.skip_compare_entities:
-		logging.info(f'Loading pre existing graph from {args.preexisting_graph}')
-		logging.info(f'Loading pre existing model from {args.preexisting_model}')
-		# Check if pre-existing graph and model paths are provided
-		if args.preexisting_graph is None or args.preexisting_model is None:
-			logging.error("Pre-existing graph and model paths must be provided if skipping graph generation or model training.")
-			sys.exit(1)		
+	if not args.skip_compare_entities:		
 		adata_C, adata_G, adata_P, adata_K, adata_M = extract_embeddings(args)
 		workdir = args.output
 		path_to_graph = args.graph_dir
@@ -272,9 +265,7 @@ def process_args():
 	io_group.add_argument('-kmers', '--input-kmers', required=True, type=str, metavar='FILE', help='Path to kmer prediction file')
 	io_group.add_argument('-motifs', '--input-motifs', required=True, type=str, metavar='FILE', help='Path to motif prediction file')	
 	io_group.add_argument('-graph', '--preexisting-graph', required=False, type=str, help='graph preexisting dir')
-	io_group.add_argument('-model', '--preexisting-model', required=False, type=str, help='model preexisting dir')
-	io_group.add_argument('-entity_alias', '--path-entity_alias', required=False, type=str, help='path to entity_alias')
-	io_group.add_argument('-entity', '--path-entity', required=False, type=str, help='path to entity')
+	io_group.add_argument('-model', '--preexisting-model', required=False, type=str, help='model preexisting dir')	
 	io_group.add_argument('-emb', '--path-emb', required=False, type=str, help='path to pbg model')
 	io_group.add_argument('-dir_graph', '--graph-dir', required=False, type=str, help='path to store graph')
 	io_group.add_argument('-o', '--output', required=True, type=str, help='Output directory to store processed files')
