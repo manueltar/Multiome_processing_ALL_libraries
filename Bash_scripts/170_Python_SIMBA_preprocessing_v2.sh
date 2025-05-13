@@ -33,6 +33,9 @@ python_script_SIMBA_QC_and_embeddings=$(echo "$python_path""1_simba_QC_model_tra
 memory=$(echo "12000")
 processors=$(echo "30")
 
+#memory=$(echo "12000")
+#processors=$(echo "30")
+
 
 
 

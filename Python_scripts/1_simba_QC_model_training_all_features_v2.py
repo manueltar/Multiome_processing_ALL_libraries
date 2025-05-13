@@ -14,7 +14,9 @@ import argparse
 import logging
 import subprocess
 import time
-
+import numpy as np
+import pandas as pd
+import pickle
 
 def QC_RNA(args):
 	logging.info("RNA QC")
@@ -88,6 +90,45 @@ def read_kmers_and_motifs(args):
 	adata_PM.var.index = [x.decode('utf-8') for x in adata_PM.var.index]
 	si.pp.binarize(adata_PK)
 	si.pp.binarize(adata_PM)
+
+	# Assuming adata_PM is already loaded
+
+	# Store the original var_names in the .var DataFrame
+	adata_PM.var['original_var_names'] = adata_PM.var_names
+
+	original_var_names_list = adata_PM.var_names.tolist() # Get the current (original) names as a list
+	transformed_var_names = []
+
+	for var_name in original_var_names_list:
+		transformed_name = var_name  # Initialize transformed_name
+		if '/' in var_name:
+			parts = var_name.split('/')
+			first_part = parts[0]
+			if '(' in first_part:
+				transformed_name = first_part.split('(')[0]
+			else:
+				transformed_name = first_part
+		else:
+			if '(' in var_name:
+				transformed_name = var_name.split('(')[0]
+			else:
+				transformed_name = var_name
+		# Apply the second substitution (if relevant)
+		if ':' in transformed_name and transformed_name.startswith('M_'):
+			transformed_name = transformed_name.replace(':', '_')
+		# Apply the third substitution (if relevant)
+		if 'PU.1' in transformed_name:
+			transformed_name = transformed_name.replace('PU.1', 'SPI1')
+		transformed_var_names.append(transformed_name)
+	# Assign the transformed list as the new var_names (index of .var)
+	adata_PM.var_names = pd.Index(transformed_var_names)
+	adata_PM.var_names_make_unique() # Add this line
+	print("First 5 rows of the .var DataFrame:")
+	print(adata_PM.var.head())
+	print("\nFirst 10 of the transformed var_names:")
+	print(adata_PM.var_names[:10])
+	print("\nFirst 700-710 of the original var_names:")
+	print(adata_PM.var['original_var_names'][700:710])
 	workdir = args.output
 	adata_PM.write(os.path.join(workdir,'adata_PM.h5ad'))
 	adata_PK.write(os.path.join(workdir,'adata_PK.h5ad'))
