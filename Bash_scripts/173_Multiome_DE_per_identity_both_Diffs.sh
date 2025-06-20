@@ -1,5 +1,7 @@
 #!/bin/bash
- 
+
+set -e
+
 eval "$(conda shell.bash hook)"
   
 
@@ -8,15 +10,15 @@ Rscripts_path=$(echo "/home/manuel.tardaguila/Scripts/R/")
 MASTER_ROUTE=$1
 analysis=$2
 TF_terms=$(echo 'GATA2,CUX1,CREB5,GATA1,GATA6,BCL11A,BCL11B,MAZ,NR2F1,PROX1,ZBTB7A')
-search_terms=$(echo 'FIBROSIS,PLATELET,ERYTHROCYTE,MEGAKARYOCYTE,CHEK2,_ATM_,DNMT3A,HEMATOPOIETIC_,HEMATOPOIESIS_,RUNX1,GATA2,CUX1,CREB5,GATA1,GATA6,BCL11A,BCL11B,MAZ,NR2F1,PROX1,ZBTB7A,APOPTOSIS,G2M,S\ phase,HSPC,Mega,Mye,LSC,WNT,LYMPHOCYTES,LYMPH,TH1,ILC3,IMMUNE')
+search_terms=$(echo 'FIBROSIS,PLATELET,ERYTHROCYTE,MEGAKARYOCYTE,CHEK2,_ATM_,DNMT3A,HEMATOPOIETIC_,HEMATOPOIESIS_,RUNX1,GATA2,CUX1,CREB5,GATA1,GATA6,BCL11A,BCL11B,MAZ,NR2F1,PROX1,ZBTB7A,APOPTOSIS,G2M,S\ phase,HSPC,Mega,Mye,LSC,WNT,LYMPHOCYTES,LYMPH,TH1,ILC3,IMMUNE,mir5739')
 path_to_GMT=$(echo "/home/manuel.tardaguila/GMT_files/msigdb_v2023.1.Hs_files_to_download_locally_ENTREZ/")
 
 output_dir=$(echo "$MASTER_ROUTE""$analysis""/")
 
 Log_files=$(echo "$output_dir""/""Log_files/")
 
-#rm -rf $Log_files
-#mkdir -p $Log_files
+
+mkdir -p $Log_files
 
 
 Diff_array=$(echo 'Diff_MK,Diff_lymph')

@@ -121,8 +121,8 @@ DE_function = function(option_list)
  
   # Join layers of RNA after the integration ----------------------
   
-  DefaultAssay(adata_sub_Diff)<-'RNA'
-  adata_sub_Diff<-JoinLayers(adata_sub_Diff)
+  # DefaultAssay(adata_sub_Diff)<-'RNA'
+  # adata_sub_Diff<-JoinLayers(adata_sub_Diff)
   
   ## Create a variable to correct for clone line ------------------------------------
   
@@ -595,6 +595,9 @@ DE_function = function(option_list)
     svgname<-paste("barplot_cell_counts",".svg",sep='')
     
     ggsave(svgname,plot=barplot, device ='svg', height=5, width=5)
+    
+    
+    write.table(metadata_df, file="cell_count_table.tsv", sep="\t",quote=F, row.names=F)
     
     
     ### Subset the counts list ----------------------------------------------------------------------------------
